@@ -1,0 +1,18 @@
+---
+- hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: add user
+      command: adduser user1
+
+    - name:
+      file:
+        path: /home/user1/.ssh/
+        state: directory
+
+    - name: copy encrypted ssh-key
+      copy:
+        src: /home/petr/ansible/playbooks/encrypt_ssh.pub
+        dest: /home/user1/.ssh/id_rsa.pub
+
+
