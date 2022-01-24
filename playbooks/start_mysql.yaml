@@ -1,0 +1,8 @@
+---
+- hosts: localhost
+  gather_facts: true
+  tasks:
+    - name: start mysql
+      service:
+        name: mysqld.service
+        state: started

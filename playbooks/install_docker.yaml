@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  gather_facts: true
+  tasks:
+    - name: install docker to localhost
+      yum:
+        name: docker-ce
+        state: installed
+    - name: start docker
+      service:
+        name: docker
+        state: started
