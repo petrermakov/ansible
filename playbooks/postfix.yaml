@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: install postfix to localhost
+      yum:
+        name: postfix
+        state: installed
+      tags: init postfix
+
+    - name: start postfix
+      service:
+        name: postfix
+        state: started
+      tags: init postfix
+
+    - name: drop postfix
+      yum:
+        name: postfix
+        state: removed
+      tags: drop postfix
+
+
