@@ -1,0 +1,32 @@
+---
+- hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: install nginx
+      yum:
+        name: nginx
+        state: installed
+     
+    - name: install php-fpm
+      yum:
+        name: php-fpm
+        state: installed
+              
+    - name: start nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: start php-fpm
+      service:
+        name: php-fpm
+        state: started
+        enabled: yes
+
+    - name: copy new index.php
+      copy:
+        src: /home/petr/ansible/playbooks/index.php
+        dest: /usr/share/nginx/html/index.php
+
+
