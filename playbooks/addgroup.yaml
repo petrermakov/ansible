@@ -1,0 +1,29 @@
+---
+- hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: add group 'superusers'
+      group:
+        name: superusers
+        state: present
+
+    - name: add 'user2'
+      user:
+        name: user2 
+        groups: superusers
+        append: yes
+
+    - name: add 'user3'
+      user:
+        name: user3 
+        groups: superusers
+        append: yes
+
+    - name: Validate the sudoers file before saving
+      lineinfile:
+        path: /etc/sudoers
+        state: present
+        regexp: '^%wheel ALL='
+        line: '%superusers ALL=(ALL) NOPASSWD: ALL'
+        validate: /usr/sbin/visudo -cf %s
+
