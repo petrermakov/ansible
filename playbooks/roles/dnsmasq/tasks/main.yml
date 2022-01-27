@@ -1,0 +1,12 @@
+---
+# tasks file for dnsmasq
+- name: install package
+  yum:
+    name: dnsmasq
+    state: installed
+
+- name: start service
+  service: 
+    name: dnsmasq
+    state: started
+    enabled: yes
