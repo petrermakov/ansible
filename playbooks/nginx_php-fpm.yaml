@@ -29,4 +29,19 @@
         src: /home/petr/ansible/playbooks/index.php
         dest: /usr/share/nginx/html/index.php
 
+    - name: change root directory for nginx
+      replace:
+        path: /etc/nginx/nginx.conf
+        after: 'root'
+        regexp: '/usr/share/nginx/html;'
+        replace: '/opt/nginx/ansible;'
+      notify:
+      - Restart nginx 
+
+  handlers:
+    - name: Restart nginx
+      service:
+        name: nginx
+        state: restarted
+
 
